@@ -1,13 +1,15 @@
 import * as React from "react";
 import {VectorMap} from "react-jvectormap"
 
+
 interface Props {
   onRegionClick: (e: React.MouseEvent<SVGElement>, countryCode: string) => void;
   highlightCountries: {[key: string]: string};
+  selectedRegion: string;
+  focusOn: string;
 }
 
 export const Map = (props: Props) => {
-
   const onRegionTipShow = (e: React.MouseEvent, tip: object, country: string): any => {
     return false; // disable showing name of the country on mouseover
   };
@@ -49,12 +51,14 @@ export const Map = (props: Props) => {
       selectedHover: {}
     }}
     regionsSelectable={true}
+    regionsSelectableOne={true}
+    selectedRegions={props.selectedRegion}
+    focusOn={props.focusOn}
     series={{
       regions: [
         {
-          values: props.highlightCountries,  //this is your data
-          scale: ["#146804", "#ff0000"],  //your color game's here
-          normalizeFunction: "polynomial"
+          values: props.highlightCountries,
+          scale: ['#ff0000'],
         }
       ]
     }}

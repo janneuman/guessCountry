@@ -1,38 +1,34 @@
 import * as React from 'react';
-import {getName} from 'country-list'; // TODO: unused
 import {Map} from './components/map';
 import {CountryInput} from "./components/countryInput";
+import {GuessCorrectlyList} from './components/guessCorrectlyList';
 import {getGuessResult} from './helpers/getGuessResult';
 
 export const App = () => {
   const [showInput, setShowInput] = React.useState(false);
-  const [userGuess, setUserGuess] = React.useState('');
-  const [selectedCountry, setSelectedCountry] = React.useState('');
+  const [selectedRegion, setSelectedRegion] = React.useState('');
   const [guessCorrectly, setGuessCorrectly] = React.useState({});
   const [score, setScore] = React.useState(0);
 
   const onRegionClick = (e: React.MouseEvent<SVGElement>, countryCode: string) => {
     setShowInput(true);
-    setSelectedCountry(countryCode);
+    setSelectedRegion(countryCode);
   };
 
-  const onUserGuessChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserGuess(e.target.value);
-  }
-
-  const onUserCountryGuessSubmitted = () => {
-    if (getGuessResult(userGuess, selectedCountry)) {
+  const onUserCountryGuessSubmitted = (userGuess: string) => {
+    if (getGuessResult(userGuess, selectedRegion)) {
       setScore(score + 100);
-      setGuessCorrectly({
-        ...guessCorrectly,
-        [selectedCountry]: score,
+      setGuessCorrectly(prevState => {
+        return {
+          ...prevState,
+          [selectedRegion]: score,
+        }
       });
     }
 
     //reset
     setShowInput(false);
-    setSelectedCountry('');
-    setUserGuess('');
+    setSelectedRegion('');
   };
 
   return (
@@ -40,12 +36,15 @@ export const App = () => {
       <Map
         onRegionClick={onRegionClick}
         highlightCountries={guessCorrectly}
+        selectedRegion={selectedRegion}
+        focusOn={selectedRegion}
       />
       {showInput && <CountryInput
-        userCountryGuess={userGuess}
-        onUserCountryGuessSubmitted={onUserCountryGuessSubmitted}
-        onChange={onUserGuessChange}/>
+        onUserCountryGuessSubmitted={onUserCountryGuessSubmitted}/>
       }
+      <GuessCorrectlyList
+        guessCorrectly={guessCorrectly}
+      />
     </React.Fragment>
   );
 };

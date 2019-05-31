@@ -1,29 +1,31 @@
 import * as React from 'react';
 
 interface Props {
-  userCountryGuess: string;
-  onUserCountryGuessSubmitted: () => any;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onUserCountryGuessSubmitted: (userGuess: string) => any;
 }
 
 export const CountryInput = (props: Props) => {
+  const [userGuess, setUserGuess] = React.useState('');
+
   const onCountrySubmit = (e: any): any => {
-    props.onUserCountryGuessSubmitted();
+    props.onUserCountryGuessSubmitted(userGuess);
   };
 
   const onEnterSubmit = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     if (e.keyCode === 13) {
-      props.onUserCountryGuessSubmitted();
+      props.onUserCountryGuessSubmitted(userGuess);
     }
   }
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setUserGuess(e.target.value);
 
   return (
     <React.Fragment>
       <label htmlFor="">Enter Country name:</label>
       <input
         autoFocus
-        value={props.userCountryGuess}
-        onChange={props.onChange}
+        value={userGuess}
+        onChange={onChange}
         onKeyDown={onEnterSubmit}
       />
       <button onClick={onCountrySubmit}>Check</button>
