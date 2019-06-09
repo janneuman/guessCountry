@@ -7,8 +7,6 @@ export const getGuessResult = (userGuess: string, selectedCountry: string): bool
   try {
     translation = getCountryTranslation(selectedCountry);
   } catch (error) {
-
-    console.error(error)
     return false;
   }
 

@@ -5,12 +5,18 @@ export const getCountryTranslation = (countryCode: string, language = 'cs'): str
     cs,
   };
 
+  let error = '';
+
   if (!languageList[language]) {
-    throw 'Unsupported translation language';
+    error = 'Unsupported translation language'
+    console.error(error)
+    throw error;
   }
 
   if (!languageList[language][countryCode]) {
-    throw 'Unknown country code for translation';
+    error = 'Unknown country code for translation';
+    console.error(error)
+    throw error;
   }
 
   return languageList[language][countryCode];
