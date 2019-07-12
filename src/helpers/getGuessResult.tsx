@@ -1,17 +1,16 @@
-import {remove as removeAccents} from 'remove-accents';
+import { deburr } from 'lodash';
 import {getCountryTranslation} from './translateCountry';
 
 export const getGuessResult = (userGuess: string, selectedCountry: string): boolean => {
-  let translation = '';
 
   try {
-    translation = getCountryTranslation(selectedCountry);
+    const formattedUserGuess = deburr(userGuess.trim()).toLowerCase();
+    const formattedTranslation = deburr(getCountryTranslation(selectedCountry)).toLowerCase();
+
+    return formattedTranslation === formattedUserGuess;
+
   } catch (error) {
+
     return false;
   }
-
-  const formattedUserGuess = removeAccents(userGuess).trim().toLocaleLowerCase();
-  const formattedTranslation = removeAccents(translation).toLocaleLowerCase();
-
-  return formattedTranslation === formattedUserGuess;
 };

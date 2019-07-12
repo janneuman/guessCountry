@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {Map} from './components/map';
-import {CountryInput} from "./components/countryInput";
+import {Autocomplete} from './components/AutocompleteInput/autocomplete';
 import {GuessCorrectlyList} from './components/guessCorrectlyList';
+import {Map} from './components/map';
 import {ShowRegionName} from './components/showRegionName';
 import {getGuessResult} from './helpers/getGuessResult';
 
@@ -17,7 +17,7 @@ export const App = () => {
     setSelectedRegion(countryCode);
   };
 
-  const onUserCountryGuessSubmitted = (userGuess: string) => {
+  const onUserRegionGuessSubmitted = (userGuess: string) => {
     if (getGuessResult(userGuess, selectedRegion)) {
       setScore(score + 1);
       setGuessCorrectly(prevState => {
@@ -43,9 +43,9 @@ export const App = () => {
         selectedRegion={selectedRegion}
         focusOn={selectedRegion}
       />
-      {showInput && <CountryInput
-        onUserCountryGuessSubmitted={onUserCountryGuessSubmitted} />
-      }
+      {showInput && <Autocomplete
+        onUserRegionGuessSubmitted={onUserRegionGuessSubmitted}
+      />}
       <GuessCorrectlyList
         guessCorrectly={guessCorrectly}
       />
