@@ -46,7 +46,7 @@ export const Map = (props: Props) => {
         cursor: 'pointer'
       },
       selected: {
-        fill: '#2938bc',  //what colour clicked country will be
+        fill: '#2938bc',  //what colour clicked region will be
       },
       selectedHover: {}
     }}

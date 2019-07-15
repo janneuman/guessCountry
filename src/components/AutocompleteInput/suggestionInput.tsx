@@ -1,6 +1,6 @@
 import * as React from "react";
 import TextField, {TextFieldProps} from "@material-ui/core/TextField";
-import {createStyles, makeStyles, Theme} from "@material-ui/core";
+import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 
 type Props = TextFieldProps & {
   ref?: React.Ref<HTMLDivElement>;
@@ -17,10 +17,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
-
-const onChange = (e) => {
-  console.log(e, 'e')
-}
 
 export const SuggestionInput = (props: Props) => {
   const { InputProps, ref, ...other } = props;

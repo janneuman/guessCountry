@@ -12,9 +12,12 @@ export const App = () => {
   const [guessCorrectly, setGuessCorrectly] = React.useState({});
   const [score, setScore] = React.useState(0);
 
-  const onRegionClick = (e: React.MouseEvent<SVGElement>, countryCode: string) => {
-    setShowInput(true);
-    setSelectedRegion(countryCode);
+  const onRegionClick = (e: React.MouseEvent<SVGElement>, regionCode: string) => {
+    const alreadyGuessed = Object.keys(guessCorrectly).filter(region => region === regionCode);
+    const showGuessInput = !alreadyGuessed.length;
+
+    setShowInput(showGuessInput);
+    setSelectedRegion(regionCode);
   };
 
   const onUserRegionGuessSubmitted = (userGuess: string) => {
@@ -48,6 +51,7 @@ export const App = () => {
       />}
       <GuessCorrectlyList
         guessCorrectly={guessCorrectly}
+        selectedRegion={selectedRegion}
       />
       {showAnswer && !showInput && <ShowRegionName
         regionName={selectedRegion}

@@ -44,7 +44,6 @@ export const Autocomplete = (props: Props) => {
         placeholder: 'Search for a country',
         onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => {
           if (!isOpen && inputValue.length) {
-            console.log(inputValue, 'suvmir ')
             props.onUserRegionGuessSubmitted(inputValue);
           }
         },
