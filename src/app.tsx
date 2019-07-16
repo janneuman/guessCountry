@@ -3,6 +3,7 @@ import {Autocomplete} from './components/AutocompleteInput/autocomplete';
 import {GuessCorrectlyList} from './components/guessCorrectlyList';
 import {Map} from './components/map';
 import {ShowRegionName} from './components/showRegionName';
+import {Score} from './components/score';
 import {getGuessResult} from './helpers/getGuessResult';
 
 export const App = () => {
@@ -18,6 +19,7 @@ export const App = () => {
 
     setShowInput(showGuessInput);
     setSelectedRegion(regionCode);
+    setShowAnswer(false);
   };
 
   const onUserRegionGuessSubmitted = (userGuess: string) => {
@@ -53,11 +55,11 @@ export const App = () => {
         guessCorrectly={guessCorrectly}
         selectedRegion={selectedRegion}
       />
-      {showAnswer && !showInput && <ShowRegionName
+      {showAnswer && <ShowRegionName
         regionName={selectedRegion}
       />
       }
-      <p>Your score: {score}</p>
+      <Score score={score}/>
     </React.Fragment>
   );
 };
