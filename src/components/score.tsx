@@ -39,5 +39,5 @@ export const Score = (props: Props) => {
     <div className={classes.scoreContainer}>
       <span className={classes.scoreNumber}>{props.score}</span>
     </div>
-  </div>;
+  </div>
 };

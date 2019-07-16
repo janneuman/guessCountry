@@ -51,14 +51,14 @@ export const App = () => {
       {showInput && <Autocomplete
         onUserRegionGuessSubmitted={onUserRegionGuessSubmitted}
       />}
-      <GuessCorrectlyList
-        guessCorrectly={guessCorrectly}
-        selectedRegion={selectedRegion}
-      />
       {showAnswer && <ShowRegionName
         regionName={selectedRegion}
       />
       }
+      <GuessCorrectlyList
+        guessCorrectly={guessCorrectly}
+        selectedRegion={selectedRegion}
+      />
       <Score score={score}/>
     </React.Fragment>
   );
