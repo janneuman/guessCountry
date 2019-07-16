@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Downshift from 'downshift';
 import Paper from '@material-ui/core/Paper';
 import {SuggestionItem} from './suggestionItem';
@@ -10,21 +10,19 @@ interface Props {
   onUserRegionGuessSubmitted: (userGuess: string) => any;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    container: {
-      flexGrow: 1,
-      position: 'relative',
-    },
-    paper: {
-      position: 'absolute',
-      zIndex: 1,
-      marginTop: theme.spacing(0),
-      left: 0,
-      right: 0,
-    },
-  }),
-);
+const useStyles = makeStyles({
+  container: {
+    flexGrow: 1,
+    position: 'relative',
+  },
+  paper: {
+    position: 'absolute',
+    zIndex: 1,
+    marginTop: 0,
+    left: 0,
+    right: 0,
+  },
+});
 
 export const Autocomplete = (props: Props) => {
   const classes = useStyles({});
@@ -54,7 +52,6 @@ export const Autocomplete = (props: Props) => {
           <SuggestionInput
             autoFocus
             fullWidth={true}
-            label="Country"
             InputLabelProps={getLabelProps({shrink: true} as any)}
             InputProps={{onBlur, onFocus}}
             inputProps={inputProps}
