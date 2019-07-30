@@ -12,7 +12,6 @@ interface Props {
 
 const useStyles = makeStyles({
   container: {
-    flexGrow: 1,
     position: 'relative',
   },
   paper: {
@@ -27,7 +26,9 @@ const useStyles = makeStyles({
 export const Autocomplete = (props: Props) => {
   const classes = useStyles({});
 
-  return <Downshift id="downshift-simple">
+  return <Downshift
+    id="downshift-simple"
+    onChange={selection => props.onUserRegionGuessSubmitted(selection)}>
     {({
         getInputProps,
         getItemProps,
@@ -40,11 +41,6 @@ export const Autocomplete = (props: Props) => {
       }) => {
       const {onBlur, onFocus, ...inputProps} = getInputProps({
         placeholder: 'Search for a country',
-        onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => {
-          if (!isOpen && inputValue.length) {
-            props.onUserRegionGuessSubmitted(inputValue);
-          }
-        },
       });
 
       return (
