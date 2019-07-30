@@ -7,27 +7,17 @@ interface Props {
 
 const useStyles = makeStyles({
   container: {
-    position: 'fixed',
-    top: 30,
-    right: 30,
+    display: 'flex',
+    alignContent: 'space-between'
   },
   headline: {
     fontSize: 15,
-  },
-  scoreContainer: {
-    width: 60,
-    height: 60,
-    boxSizing: 'border-box',
-    borderRadius: '50%',
-    backgroundColor: '#f50057',
+    flex: 1,
   },
   scoreNumber: {
-    display: 'block',
-    textAlign: 'center',
-    fontSize: 20,
-    fontWeight: 800,
-    color: '#fff',
-    lineHeight: '60px',
+    flex: 1,
+    // alignSelf: 'flex-end',
+    textAlign: 'right',
   },
 });
 
@@ -36,8 +26,6 @@ export const Score = (props: Props) => {
 
   return <div className={classes.container}>
     <span className={classes.headline}>Your Score:</span>
-    <div className={classes.scoreContainer}>
-      <span className={classes.scoreNumber}>{props.score}</span>
-    </div>
+    <span className={classes.scoreNumber}>{props.score}</span>
   </div>
 };

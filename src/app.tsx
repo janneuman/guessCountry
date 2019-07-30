@@ -5,9 +5,26 @@ import {Map} from './components/map';
 import {ShowRegionName} from './components/showRegionName';
 import {Score} from './components/score';
 import {getGuessResult} from './helpers/getGuessResult';
+import {makeStyles} from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  container: {
+    display: 'flex',
+  },
+  map: {
+    width: '80%',
+  },
+  sidebar: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '20%',
+  },
+});
 
 export const App = () => {
   const [showInput, setShowInput] = React.useState(false);
+  const [showCorrectMessage, setShowCorrectMessage] = React.useState(false);
+  const [showIncorrectMessage, setShowIncorrectMessage] = React.useState(false);
   const [showAnswer, setShowAnswer] = React.useState(false);
   const [selectedRegion, setSelectedRegion] = React.useState('');
   const [guessCorrectly, setGuessCorrectly] = React.useState({});
@@ -20,18 +37,21 @@ export const App = () => {
     setShowInput(showGuessInput);
     setSelectedRegion(regionCode);
     setShowAnswer(false);
+    setShowCorrectMessage(false);
+    setShowIncorrectMessage(false);
   };
 
   const onUserRegionGuessSubmitted = (userGuess: string) => {
     if (getGuessResult(userGuess, selectedRegion)) {
-      setScore(score + 1);
-      setGuessCorrectly(prevState => {
-        return {
-          ...prevState,
-          [selectedRegion]: score,
-        }
-      });
+      setScore(score + 10);
+      setGuessCorrectly(prevState => ({
+        ...prevState,
+        [selectedRegion]: score,
+      }));
+      setShowCorrectMessage(true);
     } else {
+      setScore(score - 2);
+      setShowIncorrectMessage(true);
       setShowAnswer(true);
     }
 
@@ -40,26 +60,43 @@ export const App = () => {
     // setSelectedRegion('');
   };
 
+  const classes = useStyles({});
   return (
-    <React.Fragment>
-      <Map
-        onRegionClick={onRegionClick}
-        highlightCountries={guessCorrectly}
-        selectedRegion={selectedRegion}
-        focusOn={selectedRegion}
-      />
-      {showInput && <Autocomplete
-        onUserRegionGuessSubmitted={onUserRegionGuessSubmitted}
-      />}
-      {showAnswer && <ShowRegionName
-        regionName={selectedRegion}
-      />
-      }
-      <GuessCorrectlyList
-        guessCorrectly={guessCorrectly}
-        selectedRegion={selectedRegion}
-      />
-      <Score score={score}/>
-    </React.Fragment>
+    <div className={classes.container}>
+      <div className={classes.map}>
+        <Map
+          onRegionClick={onRegionClick}
+          highlightCountries={guessCorrectly}
+          selectedRegion={selectedRegion}
+          focusOn={selectedRegion}
+        />
+      </div>
+      <div className={classes.sidebar}>
+        <Score score={score}/>
+
+        {showInput && <Autocomplete
+          onUserRegionGuessSubmitted={onUserRegionGuessSubmitted}
+        />}
+
+        {showCorrectMessage && <div>
+          <span>Yes! that's correct</span>
+        </div>}
+
+        {showIncorrectMessage && <div>
+          <span>No! that's incorrect</span>
+
+        </div>}
+
+        {showAnswer && <ShowRegionName
+          regionName={selectedRegion}
+        />
+        }
+
+        <GuessCorrectlyList
+          guessCorrectly={guessCorrectly}
+          selectedRegion={selectedRegion}
+        />
+      </div>
+    </div>
   );
 };

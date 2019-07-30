@@ -42,7 +42,7 @@ export const GuessCorrectlyList = (props: Props) => {
         <Flag
           className={classes.flag}
           asSquare={true}
-          country={countryCode.toLocaleLowerCase()}
+          country={countryCode.toLowerCase()}
         />
         <span className={classes.regionName}>{getCountryTranslation(countryCode)}</span>
       </li>
