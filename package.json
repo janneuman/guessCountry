@@ -6,41 +6,51 @@
   "author": "Jan Neuman",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint --ext .js,.jsx src/ webpack.config.js",
-    "dev": "webpack-dev-server  --mode development --inline --hot --open",
-    "build": "webpack  --mode development"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "@babel/cli": "^7.5.5",
-    "@babel/core": "^7.5.5",
-    "@babel/polyfill": "^7.2.5",
-    "@babel/preset-env": "^7.5.5",
-    "@types/lodash": "^4.14.136",
-    "@types/react": "^16.8.23",
-    "@types/react-dom": "^16.8.5",
-    "awesome-typescript-loader": "^5.2.1",
-    "babel-loader": "^8.0.5",
-    "css-loader": "^3.1.0",
-    "eslint": "^6.1.0",
-    "eslint-config-airbnb": "^17.1.1",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.14.3",
-    "html-webpack-plugin": "^3.2.0",
-    "mini-css-extract-plugin": "^0.8.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "style-loader": "^0.23.1",
-    "typescript": "^3.5.3",
-    "webpack": "^4.38.0",
-    "webpack-cli": "^3.3.6",
-    "webpack-dev-server": "^3.7.2"
+    "@testing-library/jest-dom": "^5.16.3",
+    "@testing-library/react": "^12.1.4",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.4.1",
+    "@types/lodash": "^4.14.180",
+    "@types/node": "^17.0.23",
+    "@types/react": "^17.0.43",
+    "@types/react-dom": "^17.0.14",
+    "eslint-config-prettier": "^8.5.0",
+    "prettier": "^2.6.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "5.0.0",
+    "typescript": "^4.6.3",
+    "web-vitals": "^2.1.4"
   },
   "dependencies": {
-    "@material-ui/core": "^4.3.0",
-    "downshift": "^3.2.10",
-    "lodash": "^4.17.15",
+    "@material-ui/core": "^4.12.3",
+    "downshift": "^6.1.7",
+    "lodash": "^4.17.21",
     "react-country-flags": "^2.2.3",
-    "react-jvectormap": "^0.0.12"
+    "react-jvectormap": "^0.0.16"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
