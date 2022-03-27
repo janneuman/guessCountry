@@ -1,7 +1,8 @@
-import * as React from "react";
+import * as React from 'react';
+// @ts-ignore
 import Flag from 'react-country-flags';
-import {getCountryTranslation} from '../helpers/translateCountry';
-import {makeStyles} from "@material-ui/core/styles";
+import { getCountryTranslation } from '../helpers/translateCountry';
+import { makeStyles } from '@material-ui/core/styles';
 
 interface Props {
   guessCorrectly: { [key: string]: string };
@@ -32,20 +33,32 @@ const useStyles = makeStyles({
 
 export const GuessCorrectlyList = (props: Props) => {
   const classes = useStyles({});
-  const isSelected = (current: string): boolean => current === props.selectedRegion;
+  const isSelected = (current: string): boolean =>
+    current === props.selectedRegion;
 
-  return <ul className={classes.container}>
-    {Object.keys(props.guessCorrectly).reverse().map((countryCode: string, index) => {
-      return <li
-        key={index}
-        className={`${classes.item} ${isSelected(countryCode) ? classes.selected : classes.normal}`}>
-        <Flag
-          className={classes.flag}
-          asSquare={true}
-          country={countryCode.toLowerCase()}
-        />
-        <span className={classes.regionName}>{getCountryTranslation(countryCode)}</span>
-      </li>
-    })}
-  </ul>
+  return (
+    <ul className={classes.container}>
+      {Object.keys(props.guessCorrectly)
+        .reverse()
+        .map((countryCode: string, index) => {
+          return (
+            <li
+              key={index}
+              className={`${classes.item} ${
+                isSelected(countryCode) ? classes.selected : classes.normal
+              }`}
+            >
+              <Flag
+                className={classes.flag}
+                asSquare={true}
+                country={countryCode.toLowerCase()}
+              />
+              <span className={classes.regionName}>
+                {getCountryTranslation(countryCode)}
+              </span>
+            </li>
+          );
+        })}
+    </ul>
+  );
 };
